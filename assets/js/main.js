@@ -154,9 +154,20 @@
         if(errorEl) errorEl.hidden = false;
         return;
       }
+
+      // validate phone is complete (11 digits for Brazilian number)
+      var tel = document.getElementById('telefone').value.trim();
+      var telDigits = tel.replace(/\D/g, '').length;
+      if(telDigits !== 11){
+        if(errorEl){
+          errorEl.textContent = 'Preencha o WhatsApp completamente (11 dígitos).';
+          errorEl.hidden = false;
+        }
+        return;
+      }
+
       if(errorEl) errorEl.hidden = true;
       var nome = document.getElementById('nome').value.trim();
-      var tel = document.getElementById('telefone').value.trim();
       var msg = document.getElementById('mensagem').value.trim();
 
       // formatted message with line breaks and structure
